@@ -4,6 +4,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.pomclass.LoginPagePOM;
 import com.sample.BaseClass;
 
 public class LoginPageTest extends BaseClass {
@@ -12,10 +13,8 @@ public class LoginPageTest extends BaseClass {
 @BeforeClass
 	
 	public void setup() {
-getWebDriver();
-}
 		
-	@AfterClass
+	}
 	public void teardown() {
 		driver.close();
 	}
@@ -30,5 +29,24 @@ getWebDriver();
 		  System.out.println("We are on correct page...Test Pass");
 	  }
   }
+@Test
+public void loginTest() {
+	LoginPagePOM loginpagepom = new LoginPagePOM();
+	loginpagepom.login(loginpagepom.getUsername(),loginpagepom.getPassword());
 }
-
+@Test
+public void unvalidLoginTest() {
+	LoginPagePOM loginPagePom = new LoginPagePOM();
+	loginPagePom.unvalidLogin(loginPagePom.getUnvalidUsername(),loginPagePom.getUnvalidPassword());
+	
+   String errorMessage = "Invalid credentials";
+	
+if(loginPagePom.getErrorMessage().equals(errorMessage)) {
+	
+	System.out.println("Test Case Pass");
+	
+}else{
+	System.out.println("Test Case Fail");
+  }
+ }
+}
